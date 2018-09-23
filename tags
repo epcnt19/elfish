@@ -1,0 +1,24 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+CPU_H	cpu.h	2;"	d
+DEBUGGER_H	debuggers.h	2;"	d
+FALSE	types.h	6;"	d
+LINUX_H	linux.h	2;"	d
+TRUE	types.h	5;"	d
+TYPES_H	types.h	3;"	d
+cpu_rdtsc	cpu.c	/^int cpu_rdtsc() {$/;"	f
+cpu_write_brand	cpu.c	/^void cpu_write_brand(char * brand) {$/;"	f
+cpu_write_hv_vendor	cpu.c	/^void cpu_write_hv_vendor(char * vendor) {$/;"	f
+cpu_write_vendor	cpu.c	/^void cpu_write_vendor(char * vendor) {$/;"	f
+cpuid_brand	cpu.c	/^static inline void cpuid_brand(char * brand, uint32_t eax_value) {$/;"	f	file:
+cpuid_hv_vendor_00	cpu.c	/^static inline void cpuid_hv_vendor_00(char * vendor) {$/;"	f	file:
+cpuid_vendor_00	cpu.c	/^static inline void cpuid_vendor_00(char * vendor) {$/;"	f	file:
+debug_isdebuggerpresent	debuggers.c	/^bool debug_isdebuggerpresent(){$/;"	f
+main	main.c	/^int main(void){$/;"	f
+os_system_info	linux.c	/^void os_system_info(struct utsname *s){$/;"	f
+rdtsc_diff	cpu.c	/^static inline unsigned long long rdtsc_diff() {$/;"	f	file:
+string	types.h	/^typedef char * string;$/;"	t

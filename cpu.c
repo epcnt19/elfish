@@ -1,7 +1,23 @@
 #include<stdio.h>
 #include<string.h>
 #include<stdint.h>
+#include<unistd.h>
+#include<time.h>
+#include<sys/time.h>
 #include "cpu.h"
+#include "types.h"
+
+
+static inline unsigned long long rdtsc_diff() {
+	unsigned long long ret, ret2;
+	unsigned eax, edx;
+	__asm__ volatile("rdtsc" : "=a" (eax), "=d" (edx));
+	ret  = ((unsigned long long)eax) | (((unsigned long long)edx) << 32);
+	__asm__ volatile("rdtsc" : "=a" (eax), "=d" (edx));
+	ret2  = ((unsigned long long)eax) | (((unsigned long long)edx) << 32);
+	return ret2 - ret;
+}
+
 
 static inline void cpuid_vendor_00(char * vendor) {
 	int ebx = 0, ecx = 0, edx = 0;
@@ -81,3 +97,14 @@ void cpu_write_brand(char * brand) {
 }
 
 
+int cpu_rdtsc() {
+	int i;
+	unsigned long long avg = 0;
+	for (i = 0; i < 10; i++) {
+		avg = avg + rdtsc_diff();
+		usleep(500 * 1000);
+	}
+	avg = avg / 10;
+	printf("%d\n",avg);
+	return (avg < 750 && avg > 0) ? FALSE : TRUE;
+}
