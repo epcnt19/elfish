@@ -29,7 +29,7 @@ int main(void){
 			printf("\t\tHypervisor: %s\n", cpu_hv_vendor);
 	}
 
-	printf("\t\tCPU brand: %s\n\n", cpu_brand);
+	printf("[*] CPU brand:\t%s\n\n", cpu_brand);
 	if (strlen(cpu_hv_vendor)){
 		snprintf(aux, sizeof(aux) - sizeof(aux[0]), "CPU: %s (HV: %s) %s", cpu_vendor,cpu_hv_vendor, cpu_brand);
 	}else{
@@ -46,7 +46,9 @@ int main(void){
 	printf("[*] CPU information based detections\n");
 	printf("...Checking the difference between CPU timestamp counters (rdtsc)\n");
 	if(cpu_rdtsc() == TRUE){
-		printf("...CPU VM traced by checking the difference between CPU timestamp counters (rdtsc)\n");
+		printf("...CPU VM traced by checking the difference between CPU timestamp counters (rdtsc)\n\n");
+	}else{
+		printf("...not traced\n\n");
 	}
 
 	return 0;
