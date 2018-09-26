@@ -51,5 +51,12 @@ int main(void){
 		printf("...not traced\n\n");
 	}
 
+	printf("...Checking the difference between CPU timestamp counters (rdtsc) forcing VM exit\n");
+	if(cpu_rdtsc_force_vmexit() == TRUE){
+		printf("CPU VM traced by checking the difference between CPU timestamp counters (rdtsc) forcing VM exit\n\n");
+	}else{
+		printf("...not traced\n\n");
+	}
+		
 	return 0;
 }

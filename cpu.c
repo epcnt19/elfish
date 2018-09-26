@@ -19,6 +19,20 @@ static inline unsigned long long rdtsc_diff() {
 }
 
 
+static inline unsigned long long rdtsc_diff_vmexit() {
+	unsigned long long ret, ret2;
+	unsigned eax, edx;
+	__asm__ volatile("rdtsc" : "=a" (eax), "=d" (edx));
+	ret  = ((unsigned long long)eax) | (((unsigned long long)edx) << 32);
+	/* vm exit forced here. it uses: eax = 0; cpuid; */
+	__asm__ volatile("cpuid" : /* no output */ : "a"(0x00));
+	/**/
+	__asm__ volatile("rdtsc" : "=a" (eax), "=d" (edx));
+	ret2  = ((unsigned long long)eax) | (((unsigned long long)edx) << 32);
+	return ret2 - ret;
+}
+
+
 static inline void cpuid_vendor_00(char * vendor) {
 	int ebx = 0, ecx = 0, edx = 0;
 
@@ -107,4 +121,17 @@ int cpu_rdtsc() {
 	avg = avg / 10;
 	// return (avg < 100 && avg > 0) ? FALSE : TRUE;
 	return (avg < 100 && avg > 0) ? FALSE : TRUE;
+}
+
+
+int cpu_rdtsc_force_vmexit() {
+	int i;
+	unsigned long long avg = 0;
+	for (i = 0; i < 10; i++) {
+		avg = avg + rdtsc_diff_vmexit();
+		usleep(500 * 1000);
+	}
+	avg = avg / 10;
+	printf("%lld\n",avg);
+	return (avg < 1000 && avg > 0) ? FALSE : TRUE;
 }
