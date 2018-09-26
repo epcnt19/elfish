@@ -119,8 +119,8 @@ int cpu_rdtsc() {
 		usleep(500 * 1000);
 	}
 	avg = avg / 10;
-	// return (avg < 100 && avg > 0) ? FALSE : TRUE;
-	return (avg < 100 && avg > 0) ? FALSE : TRUE;
+	return (avg < 750 && avg > 0) ? FALSE : TRUE;
+	//return (avg < 100 && avg > 0) ? FALSE : TRUE;
 }
 
 
@@ -132,6 +132,5 @@ int cpu_rdtsc_force_vmexit() {
 		usleep(500 * 1000);
 	}
 	avg = avg / 10;
-	printf("%lld\n",avg);
 	return (avg < 1000 && avg > 0) ? FALSE : TRUE;
 }
